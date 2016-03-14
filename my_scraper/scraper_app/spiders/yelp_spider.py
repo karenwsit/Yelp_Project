@@ -9,13 +9,13 @@ class YelpSpider(BaseSpider):
     allowed_domains = ['yelp.com']
     start_urls = ['https://www.yelp.com/biz/']
 
-    deals_list_xpath = '//div[@class="review review--with-sidebar"]/div[@class="review-wrapper"]'
+    deals_list_xpath = '//div[@class="review review--with-sidebar"]/'
 
     items = {
-    'review_id': './/',
-    'text': './/div[@class="review-content"]/p[@itemprop="description"]',
-    'rating': ,
-    'date': Field(),
+    'review_id': './/@data-review-id',
+    'text': './div[@class="review-wrapper"]/div[@class="review-content"]/p[@itemprop="description"]',
+    'rating': './/div[@class="review-wrapper"]/div[@class="review-content"]/div[@class="biz-rating biz-rating-very-large clearfix"]/div[@itemprop="reviewRating"]/div[@class="rating-very-large"]/meta/@content',
+    'date': './/div[@class="review-wrapper"]/div[@class="review-content"]/div[@class="biz-rating biz-rating-very-large clearfix"]/span[@class="rating-qualifier"]/meta/@content',
     'reviewer_location': './/div[@class="review-sidebar"]/div[@class="review-sidebar-content"]/div[@class="ypassport media-block"]/div[@class="media-story"]/ul[@class="user-passport-info"]/li[@class="user-location"]/text()',
-    'restaurant_id': Field()
+    'restaurant_id': '//div[@class="review-sidebar"]/div[@class="review-sidebar-content"]/div[@class="ypassport media-block"]/div[@class="media-story"]/ul[@class="user-passport-info"]/li[@class="user-location"]/b/text()'
     }
